@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html">
+   
+   
+    <h:head>
+	     <style type="text/css">
+			table {
+				width: 100%;
+				max-width: 1000px;
+				border-collapse: collapse;
+			}
+			
+			table, td, th {
+				border: 1px solid black;
+			}
+			
+			.destaque {
+				background-color: silver;
+			}
+		</style>      
+    </h:head>   
+   
+	<h1>Produtos</h1>
+	
+	<h:dataTable value="#{produtoMB.produtos}" var="p">
+		<h:column>
+			<f:facet name="header"><h:outputText value="Código" /></f:facet>
+			<h:outputText value="#{p.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+			<h:outputText value="#{p.nome}" style=""/>
+		</h:column>
+		<h:column>
+			<f:facet name="header"><h:outputText value="Valor" /></f:facet>
+			<h:outputText value="#{p.valor}" >
+				<f:convertNumber type="currency"/>
+			</h:outputText>
+		</h:column>				
+		<h:column>
+			<h:form>
+				<h:commandButton value="Remover" 
+					action="#{produtoMB.removerProduto(p)}" 
+					rendered="#{produtoMB.possuiPermissao(p)}"/>
+			</h:form>
+		</h:column>
+	</h:dataTable>		
+
+</ui:composition>
